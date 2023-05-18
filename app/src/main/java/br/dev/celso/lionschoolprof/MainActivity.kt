@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import br.dev.celso.lionschoolprof.ui.screens.CoursesScreen
 import br.dev.celso.lionschoolprof.ui.screens.MainScreen
+import br.dev.celso.lionschoolprof.ui.screens.StudentsListScreen
 import br.dev.celso.lionschoolprof.ui.theme.LionSchoolProfTheme
 
 class MainActivity : ComponentActivity() {
@@ -22,7 +23,8 @@ class MainActivity : ComponentActivity() {
                 // A surface container using the 'background' color from the theme
                 Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.background) {
                     //MainScreen()
-                    CoursesScreen()
+                    //CoursesScreen()
+                    StudentsListScreen()
                 }
             }
         }

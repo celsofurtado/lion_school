@@ -28,11 +28,11 @@ fun CoursesScreen() {
         Surface(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(16.dp)
         ) {
             Column(
                 modifier = Modifier
                     .fillMaxSize()
+                    .padding(16.dp)
             ) {
                 Image(
                     painter = painterResource(id = R.drawable.logo2),
@@ -50,7 +50,7 @@ fun CoursesScreen() {
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(top = 16.dp),
-                    shape = RoundedCornerShape(8.dp),
+                    shape = RoundedCornerShape(12.dp),
                     colors = TextFieldDefaults
                         .outlinedTextFieldColors(
                             unfocusedBorderColor = Color(0xFFFFC23D),
