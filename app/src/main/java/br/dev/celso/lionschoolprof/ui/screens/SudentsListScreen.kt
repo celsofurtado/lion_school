@@ -1,10 +1,10 @@
 package br.dev.celso.lionschoolprof.ui.screens
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -24,17 +24,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.dev.celso.lionschoolprof.R
 import br.dev.celso.lionschoolprof.model.Aluno
-import br.dev.celso.lionschoolprof.model.SearchBar
+import br.dev.celso.lionschoolprof.model.SearchBarItem
 import br.dev.celso.lionschoolprof.repository.SearchBarRepository
 import br.dev.celso.lionschoolprof.repository.StudentsRepository
 import br.dev.celso.lionschoolprof.ui.theme.LionSchoolProfTheme
 
 @Composable
 fun StudentsListScreen() {
-
-    var searchBarState by remember {
-        mutableStateOf(SearchBarRepository.getFiltros())
-    }
 
     LionSchoolProfTheme() {
         Surface(
@@ -97,7 +93,7 @@ fun StudentsListScreen() {
                         )
                     }
                 )
-
+                SearchBar()
 //                LazyRow() {
 //                    items(searchBarState) {
 //                        MyChip(filtro = it)
@@ -133,20 +129,61 @@ fun StudentsListScreen() {
 }
 
 @Composable
-fun MyChip(filtro: SearchBar) {
+fun SearchBar() {
+    var searchBarItemsState by remember {
+        mutableStateOf(SearchBarRepository.getFiltros())
+    }
+    SearchItems(
+        searchBarItems = searchBarItemsState,
+        onClick = {
+            Log.i("xpto", "State xxxx: $it")
+            searchBarItemsState = it
+
+        })
+}
+
+@Composable
+fun SearchItems(
+    searchBarItems: ArrayList<SearchBarItem>,
+    onClick: (ArrayList<SearchBarItem>) -> Unit
+) {
+    Row {
+        SearchBarItem(searchBarItem = searchBarItems[0], onClick = {
+            Log.i("xpto", "SearchItems: $it")
+            searchBarItems[0] = it
+            onClick(searchBarItems)
+        })
+        SearchBarItem(searchBarItem = searchBarItems[1], onClick = {
+            Log.i("xpto", "SearchItems: $it")
+            searchBarItems[0] = it
+            onClick(searchBarItems)
+        })
+        SearchBarItem(searchBarItem = searchBarItems[2], onClick = {
+            Log.i("xpto", "SearchItems: $it")
+            searchBarItems[0] = it
+            onClick(searchBarItems)
+        })
+    }
+}
+
+@Composable
+fun SearchBarItem(searchBarItem: SearchBarItem, onClick: (SearchBarItem) -> Unit) {
     Surface(
         modifier = Modifier
             .padding(end = 8.dp)
-            .clickable {},
+            .clickable {
+                //onClick(SearchBarItem(searchBarItem.texto, true, Color.Red))
+                onClick(SearchBarItem("Clicou!!", true, Color.Red))
+            },
         color = when {
-            filtro.isSelected -> Color.Blue
-            else -> filtro.cor
+            searchBarItem.isSelected -> Color.Blue
+            else -> searchBarItem.cor
         },
         shape = RoundedCornerShape(18.dp),
         contentColor = Color.White
     ) {
         Text(
-            text = "${filtro.texto}",
+            text = "${searchBarItem.texto}",
             modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
         )
     }
