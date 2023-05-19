@@ -24,19 +24,17 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.dev.celso.lionschoolprof.R
 import br.dev.celso.lionschoolprof.model.Aluno
-import br.dev.celso.lionschoolprof.model.Filtro
-import br.dev.celso.lionschoolprof.repository.FiltroRepository
+import br.dev.celso.lionschoolprof.model.SearchBar
+import br.dev.celso.lionschoolprof.repository.SearchBarRepository
 import br.dev.celso.lionschoolprof.repository.StudentsRepository
 import br.dev.celso.lionschoolprof.ui.theme.LionSchoolProfTheme
 
 @Composable
 fun StudentsListScreen() {
 
-    var filtrosState by remember {
-        mutableStateOf(listOf<Filtro>())
+    var searchBarState by remember {
+        mutableStateOf(SearchBarRepository.getFiltros())
     }
-
-    filtrosState = FiltroRepository.getFiltros()
 
     LionSchoolProfTheme() {
         Surface(
@@ -99,11 +97,14 @@ fun StudentsListScreen() {
                         )
                     }
                 )
-                LazyRow() {
-                    items(filtrosState) {
-                        MyChip(filtro = it)
-                    }
-                }
+
+//                LazyRow() {
+//                    items(searchBarState) {
+//                        MyChip(filtro = it)
+//                    }
+//                }
+
+
                 Spacer(modifier = Modifier.height(16.dp))
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Icon(
@@ -132,7 +133,7 @@ fun StudentsListScreen() {
 }
 
 @Composable
-fun MyChip(filtro: Filtro, onSearchChange) {
+fun MyChip(filtro: SearchBar) {
     Surface(
         modifier = Modifier
             .padding(end = 8.dp)
