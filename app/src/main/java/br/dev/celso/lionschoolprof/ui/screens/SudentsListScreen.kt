@@ -1,6 +1,5 @@
 package br.dev.celso.lionschoolprof.ui.screens
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -22,15 +21,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import br.dev.celso.lionschoolprof.R
+import br.dev.celso.lionschoolprof.components.Header
+import br.dev.celso.lionschoolprof.components.SearchBar
 import br.dev.celso.lionschoolprof.model.Aluno
-import br.dev.celso.lionschoolprof.model.SearchBarItem
-import br.dev.celso.lionschoolprof.repository.SearchBarRepository
 import br.dev.celso.lionschoolprof.repository.StudentsRepository
 import br.dev.celso.lionschoolprof.ui.theme.LionSchoolProfTheme
 
 @Composable
-fun StudentsListScreen() {
+fun StudentsListScreen(navigationController: NavHostController) {
 
     LionSchoolProfTheme() {
         Surface(
@@ -42,30 +42,7 @@ fun StudentsListScreen() {
                     .fillMaxSize()
                     .padding(16.dp)
             ) {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Column() {
-                        Image(
-                            painter = painterResource(id = R.drawable.logo2),
-                            contentDescription = "logo"
-                        )
-                    }
-                    Card(
-                        backgroundColor = Color(0xFFFFC23D),
-                        shape = CircleShape
-                    ) {
-                        Text(
-                            text = "DS",
-                            fontSize = 20.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = Color(0xFF3347B0),
-                            modifier = Modifier.padding(12.dp)
-                        )
-                    }
-                }
+                Header(text = "DS")
                 Divider(
                     modifier = Modifier
                         .padding(top = 8.dp)
@@ -120,7 +97,7 @@ fun StudentsListScreen() {
                 Spacer(modifier = Modifier.height(8.dp))
                 LazyColumn() {
                     items(StudentsRepository.getStudents()) {
-                        StudentCard(aluno = it)
+                        StudentCard(aluno = it, navigationController)
                     }
                 }
             }
@@ -128,75 +105,90 @@ fun StudentsListScreen() {
     }
 }
 
-@Composable
-fun SearchBar() {
-    var searchBarItemsState by remember {
-        mutableStateOf(SearchBarRepository.getFiltros())
-    }
-    SearchItems(
-        searchBarItems = searchBarItemsState,
-        onClick = {
-            Log.i("xpto", "State xxxx: $it")
-            searchBarItemsState = it
+//@Composable
+//fun SearchBar() {
+//    var searchBarItemTodos by remember {
+//        mutableStateOf(
+//            SearchBarItem(
+//                text = "Todos",
+//                isSelected = true,
+//                color = Color(0xFF3347B0)
+//            )
+//        )
+//    }
+//    var searchBarItemCursando by remember {
+//        mutableStateOf(
+//            SearchBarItem(
+//                text = "Cursando",
+//                isSelected = false,
+//                color = Color(0xFFFFC23D)
+//            )
+//        )
+//    }
+//    var searchBarItemFinalizado by remember {
+//        mutableStateOf(
+//            SearchBarItem(
+//                text = "Finalizado",
+//                isSelected = false,
+//                color = Color(0xFFFFC23D)
+//            )
+//        )
+//    }
+//    Row() {
+//        SearchItem(searchBarItem = searchBarItemTodos) {
+//            searchBarItemTodos =
+//                SearchBarItem(text = "Todos", isSelected = true, color = Color(0xFF3347B0))
+//            searchBarItemCursando =
+//                SearchBarItem(text = "Cursando", isSelected = false, color = Color(0xFFFFC23D))
+//            searchBarItemFinalizado =
+//                SearchBarItem(text = "Finalizado", isSelected = false, color = Color(0xFFFFC23D))
+//        }
+//        SearchItem(searchBarItem = searchBarItemCursando) {
+//            searchBarItemTodos =
+//                SearchBarItem(text = "Todos", isSelected = false, color = Color(0xFFFFC23D))
+//            searchBarItemCursando =
+//                SearchBarItem(text = "Cursando", isSelected = true, color = Color(0xFF3347B0))
+//            searchBarItemFinalizado =
+//                SearchBarItem(text = "Finalizado", isSelected = false, color = Color(0xFFFFC23D))
+//        }
+//        SearchItem(searchBarItem = searchBarItemFinalizado) {
+//            searchBarItemTodos =
+//                SearchBarItem(text = "Todos", isSelected = false, color = Color(0xFFFFC23D))
+//            searchBarItemCursando =
+//                SearchBarItem(text = "Cursando", isSelected = false, color = Color(0xFFFFC23D))
+//            searchBarItemFinalizado =
+//                SearchBarItem(text = "Finalizado", isSelected = true, color = Color(0xFF3347B0))
+//        }
+//    }
+//}
+//
+//@Composable
+//fun SearchItem(searchBarItem: SearchBarItem, onClick: () -> Unit) {
+//    Surface(
+//        modifier = Modifier
+//            .padding(end = 8.dp)
+//            .clickable {
+//                onClick()
+//            },
+//        color = searchBarItem.color,
+//        shape = RoundedCornerShape(18.dp),
+//        contentColor = Color.White
+//    ) {
+//        Text(
+//            text = "${searchBarItem.text}",
+//            modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
+//        )
+//    }
+//}
 
-        })
-}
-
 @Composable
-fun SearchItems(
-    searchBarItems: ArrayList<SearchBarItem>,
-    onClick: (ArrayList<SearchBarItem>) -> Unit
-) {
-    Row {
-        SearchBarItem(searchBarItem = searchBarItems[0], onClick = {
-            Log.i("xpto", "SearchItems: $it")
-            searchBarItems[0] = it
-            onClick(searchBarItems)
-        })
-        SearchBarItem(searchBarItem = searchBarItems[1], onClick = {
-            Log.i("xpto", "SearchItems: $it")
-            searchBarItems[0] = it
-            onClick(searchBarItems)
-        })
-        SearchBarItem(searchBarItem = searchBarItems[2], onClick = {
-            Log.i("xpto", "SearchItems: $it")
-            searchBarItems[0] = it
-            onClick(searchBarItems)
-        })
-    }
-}
-
-@Composable
-fun SearchBarItem(searchBarItem: SearchBarItem, onClick: (SearchBarItem) -> Unit) {
-    Surface(
-        modifier = Modifier
-            .padding(end = 8.dp)
-            .clickable {
-                //onClick(SearchBarItem(searchBarItem.texto, true, Color.Red))
-                onClick(SearchBarItem("Clicou!!", true, Color.Red))
-            },
-        color = when {
-            searchBarItem.isSelected -> Color.Blue
-            else -> searchBarItem.cor
-        },
-        shape = RoundedCornerShape(18.dp),
-        contentColor = Color.White
-    ) {
-        Text(
-            text = "${searchBarItem.texto}",
-            modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
-        )
-    }
-}
-
-@Composable
-fun StudentCard(aluno: Aluno) {
+fun StudentCard(aluno: Aluno, navigationController: NavHostController) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .height(100.dp)
             .padding(bottom = 8.dp)
-            .clickable { },
+            .clickable { navigationController.navigate("student_detail_screen") },
         backgroundColor = Color(0xff9FA9E1),
         //backgroundColor = Color.White,
         shape = RoundedCornerShape(8.dp),
@@ -277,6 +269,6 @@ fun StudentCard(aluno: Aluno) {
 @Composable
 fun StudentsListScreenPreview() {
     LionSchoolProfTheme {
-        StudentsListScreen()
+        //StudentsListScreen(navigationController)
     }
 }

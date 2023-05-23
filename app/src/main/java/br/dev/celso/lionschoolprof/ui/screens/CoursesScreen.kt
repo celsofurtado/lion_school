@@ -1,8 +1,8 @@
 package br.dev.celso.lionschoolprof.ui.screens
 
-import android.widget.Space
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -17,13 +17,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import br.dev.celso.lionschoolprof.R
+import br.dev.celso.lionschoolprof.components.Header
 import br.dev.celso.lionschoolprof.model.Course
 import br.dev.celso.lionschoolprof.repository.CourseRepository
 import br.dev.celso.lionschoolprof.ui.theme.LionSchoolProfTheme
 
 @Composable
-fun CoursesScreen() {
+fun CoursesScreen(navController: NavHostController) {
+
     LionSchoolProfTheme() {
         Surface(
             modifier = Modifier
@@ -34,16 +37,17 @@ fun CoursesScreen() {
                     .fillMaxSize()
                     .padding(16.dp)
             ) {
-                Image(
-                    painter = painterResource(id = R.drawable.logo2),
-                    contentDescription = "logo"
-                )
-                Divider(
-                    modifier = Modifier
-                        .padding(top = 8.dp)
-                        .height(2.dp),
-                    color = Color(0xFFFFC23D)
-                )
+//                Image(
+//                    painter = painterResource(id = R.drawable.logo2),
+//                    contentDescription = "logo"
+//                )
+//                Divider(
+//                    modifier = Modifier
+//                        .padding(top = 8.dp)
+//                        .height(2.dp),
+//                    color = Color(0xFFFFC23D)
+//                )
+                Header(text = "")
                 OutlinedTextField(
                     value = "",
                     onValueChange = {},
@@ -88,7 +92,7 @@ fun CoursesScreen() {
                 Spacer(modifier = Modifier.height(16.dp))
                 LazyColumn(){
                     items(CourseRepository.getCourses()){
-                        CourseCard(course = it)
+                        CourseCard(course = it, navController)
                     }
                 }
             }
@@ -97,10 +101,11 @@ fun CoursesScreen() {
 }
 
 @Composable
-fun CourseCard(course: Course) {
+fun CourseCard(course: Course, navController: NavHostController) {
     Card(modifier = Modifier
         .fillMaxWidth()
-        .padding(bottom = 8.dp),
+        .padding(bottom = 8.dp)
+        .clickable { navController.navigate("students_screen") },
         backgroundColor = Color(0xFF3347B0),
         shape = RoundedCornerShape(16.dp),
         border = BorderStroke(width = 2.dp, color = Color(0xFFFFC23D))
@@ -164,22 +169,22 @@ fun CourseCard(course: Course) {
 @Preview
 @Composable
 fun CourseCardPreview() {
-    LionSchoolProfTheme {
-        CourseCard(course = Course(
-            1,
-            "DS",
-            R.drawable.lion_developer,
-            "Desenvolvimento de Sistemas",
-            "Aprenda a desenvolver aplicações web e mobile.",
-            "3 SEMESTRES"
-        ))
-    }
+//    LionSchoolProfTheme {
+//        CourseCard(course = Course(
+//            1,
+//            "DS",
+//            R.drawable.lion_developer,
+//            "Desenvolvimento de Sistemas",
+//            "Aprenda a desenvolver aplicações web e mobile.",
+//            "3 SEMESTRES"
+//        ))
+//    }
 }
 
 @Preview(showSystemUi = true)
 @Composable
 fun CoursesScreenPreview() {
     LionSchoolProfTheme {
-        CoursesScreen()
+        //CoursesScreen(navigationController)
     }
 }
