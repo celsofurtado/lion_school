@@ -12,7 +12,7 @@ Este é um projeto integrado desenvolvido no curso de **Desenvolvimento de Siste
 ## Professores envolvidos
 
 |PROFESSOR                |DISCIPLINA                    |
-|-------------------------|------------------------------|
+|||
 |Marcel Neves Teixeira    |Back-end e Banco de dados     |
 |-------------------------|------------------------------|
 |Fernando Leonid Careaga  |Front-end                     |
