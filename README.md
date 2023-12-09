@@ -14,9 +14,7 @@ Este é um projeto integrado desenvolvido no curso de **Desenvolvimento de Siste
 |PROFESSOR                |DISCIPLINA                    |
 |-------------------------|------------------------------|
 |Marcel Neves Teixeira    |Back-end e Banco de dados     |
-|-------------------------|------------------------------|
 |Fernando Leonid Careaga  |Front-end                     |
-|-------------------------|------------------------------|
 |Celso Furtado            |Android                       |
 
 Sinta-se à vontade para forkar e melhorar o projeto. 
