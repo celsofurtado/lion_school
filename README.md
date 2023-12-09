@@ -15,7 +15,7 @@ Este é um projeto integrado desenvolvido no curso de **Desenvolvimento de Siste
 
 |PROFESSOR|DISCIPLINA|
 |----------------------------|---------------------------------|
-|Marcel Neves Teixeira                |Back-end|
+|Marcel Neves Teixeira                |Back-end                           |
 |Fernando Leonid Careaga|Front-end|
 |Celso Furtado|Android|
 
