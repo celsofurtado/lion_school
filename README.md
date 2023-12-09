@@ -1,3 +1,5 @@
+![Logo](app/src/main/res/drawable/logo.png)
+
 # LionSchool Project
 
 Este é um projeto integrado desenvolvido no curso de **Desenvolvimento de Sistemas** do SENAI Jandira
