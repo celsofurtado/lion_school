@@ -6,17 +6,16 @@ Este é um projeto integrado desenvolvido no curso de **Desenvolvimento de Siste
 
 ## Disciplinas envolvidas
 
-* Desenvolvimento Back-end
-* Desenvolvimento Front-end
-* Banco de dados
+* Desenvolvimento Backend
+* Desenvolvimento Frontend
 * Desenvolvimento para Android
 
 ## Professores envolvidos
 
 |PROFESSOR|DISCIPLINA|
 |----------------------------|---------------------------------|
-|Marcel Neves Teixeira                |Back-end                           |
-|Fernando Leonid Careaga|Front-end|
+|Marcel Neves Teixeira                |Backend                           |
+|Fernando Leonid Careaga|Frontend|
 |Celso Furtado|Android|
 
 Sinta-se à vontade para forkar e melhorar o projeto. 
